@@ -1,0 +1,42 @@
+
+import java.util.*;
+
+public class Main {
+
+    public static boolean findTreasure(int[] arrayX, int[] arrayY) {
+        
+        int magicCount = 0;
+        int magicalElement = 0;
+
+        for (int i = 0; i < arrayX.length; i++) {
+            int currentCount = 1;
+
+            for (int j = i + 1; j < arrayX.length; j++) {
+                if (arrayX[i] == arrayX[j]) {
+                    currentCount++;
+                }
+            }
+
+            if (currentCount > magicCount) {
+                magicCount = currentCount;
+                magicalElement = arrayX[i];
+            }
+        }
+
+       
+        final int finalMagicalElement = magicalElement; 
+        return Arrays.stream(arrayY).anyMatch(element -> element == finalMagicalElement);
+    }
+
+    public static void main(String[] args) {
+        // Sample 1
+        int[] arrayX1 = {1, 2, 3, 5, 5};
+        int[] arrayY1 = {5, 4, 3, 2, 1};
+        System.out.println("Sample 1: " + findTreasure(arrayX1, arrayY1)); 
+
+        // Sample 2
+        int[] arrayX2 = {1, 2, 3, 5, 5};
+        int[] arrayY2 = {4, 3, 2, 1};
+        System.out.println("Sample 2: " + findTreasure(arrayX2, arrayY2));
+    }
+}
